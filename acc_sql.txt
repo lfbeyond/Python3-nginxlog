@@ -1,0 +1,59 @@
+#
+字段：                                                         字段类型：
+server       filename
+remote,      访问ip（如设置了代理，还需要添加forward）
+r_mothod,    访问协议（get post）
+r_url        访问路径
+status,      状态码（200 400等）
+agent,       客户端（浏览器，爬虫等）
+bytes,       页面大小
+referer,     来源页面（用于分许是否google，百度搜索等）
+ip_country   ip归属地（国家）
+Time         2017-12-15 08:54:37 全格式（方便浏览）
+timeStamp    时间戳（用于时间对比）
+day          天
+month        月
+year         年
+
+
+数据库名称 acc_log
+表名       acc_log
+字段       如上
+
+CREATE TABLE `acc_log` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `server` char(11) NOT NULL DEFAULT '',
+  `Time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `timeStamp` int(11) NOT NULL DEFAULT '0',
+  `count` int(11) NOT NULL DEFAULT '0',
+  `day` int(4) NOT NULL DEFAULT '0',
+  `month` int(4) NOT NULL DEFAULT '0',
+  `year` int(4) NOT NULL DEFAULT '0',
+  `status` smallint(6) NOT NULL DEFAULT '0',
+  `bytes` int(11) NOT NULL DEFAULT '0' COMMENT '发送给客户端的响应大小',
+  `remote` varchar(40) NOT NULL DEFAULT '',
+  `r_mothod` varchar(7) NOT NULL DEFAULT '',
+  `r_url` varchar(255) NOT NULL DEFAULT '' COMMENT '$uri,已做uridecode',
+  `referer` varchar(255) NOT NULL DEFAULT '',
+  `referer_str` varchar(255) NOT NULL DEFAULT '',
+    `referer_s` varchar(255) NOT NULL DEFAULT '',
+   `agent_d` varchar(255) NOT NULL DEFAULT '',
+   `agent_s` varchar(255) NOT NULL DEFAULT '',
+   `agent_name` varchar(255) NOT NULL DEFAULT '',
+   `counter` varchar(11) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `Time` (`Time`),
+  KEY `year` (`year`),
+  KEY `day` (`day`),
+  KEY `month` (`month`)
+) ENGINE=InnoDB AUTO_INCREMENT=9503 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPRESSED;
+
+
+agent_d, agent_s, agent_name
+
+
+                            # uri_abs varchar(200) NOT NULL DEFAULT '' COMMENT '对$uri做uridecode,然后做抽象化处理',\
+                # uri_abs_crc32 bigint unsigned NOT NULL DEFAULT '0' COMMENT '对上面uri_abs字段计算crc32',\
+                # args_abs varchar(200) NOT NULL DEFAULT '' COMMENT '对$args做uridecode,然后做抽象化处理',\
+                # args_abs_crc32 bigint unsigned NOT NULL DEFAULT '0' COMMENT '对上面args字段计算crc32',\
+                # args varchar(255) NOT NULL DEFAULT '' COMMENT '$args,已做uridecode',\
